@@ -1,5 +1,5 @@
 # GenericCrudApi
-ASP.NET Core Web API to demonstrate the use of a generic CRUD controller base.
+ASP.NET Core Web API to demonstrate the use of a generic CRUD controller.
 
 ## Requeriments
 - .NET Core 5 SDK: https://dotnet.microsoft.com/download
