@@ -31,7 +31,9 @@ namespace GenericCrudApi.Controllers
             var entity = await _context.Set<T>().FindAsync(id);
 
             if (entity == null)
+            {
                 return NotFound();
+            }
 
             return Ok(entity);
         }
@@ -50,23 +52,19 @@ namespace GenericCrudApi.Controllers
         public virtual async Task<IActionResult> Update(long id, T entity)
         {
             if (id != entity.Id)
+            {
                 return BadRequest();
+            }
 
             if (!await EntityExists(id))
+            {
                 return NotFound();
+            }
 
             entity.ModificationDate = DateTime.Now;
             _context.Entry(entity).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                throw;
-            }
-
+            await _context.SaveChangesAsync();
+            
             return NoContent();
         }
 
@@ -76,7 +74,9 @@ namespace GenericCrudApi.Controllers
             var entity = await _context.Set<T>().FindAsync(id);
 
             if (entity == null)
+            {
                 return NotFound();
+            }
 
             _context.Set<T>().Remove(entity);
             await _context.SaveChangesAsync();
